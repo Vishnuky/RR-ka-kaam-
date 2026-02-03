@@ -1,0 +1,479 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Laundry Express | Healthcare Laundry Solutions{% endblock %}
+{% block meta_description %}Learn about Laundry Express - pioneers in RFID-enabled healthcare laundry management with 15+ years of industry expertise.{% endblock %}
+
+{% block nav_about_active %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ==================== ABOUT HERO ==================== */
+    .about-hero {
+        background: linear-gradient(135deg, #f0f9ff 0%, #f3f4f6 100%);
+        padding: 4rem 0 3rem;
+    }
+
+    .about-hero h1 {
+        font-size: clamp(32px, 6vw, 56px);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: var(--primary-dark);
+    }
+
+    .about-hero p {
+        font-size: 18px;
+        color: #6b7280;
+        max-width: 600px;
+    }
+
+    .about-placeholder {
+        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
+        border-radius: 12px;
+        padding: 4rem;
+        text-align: center;
+        font-size: 80px;
+        color: var(--primary-color);
+        margin-top: 2rem;
+    }
+
+    /* ==================== TIMELINE SECTION ==================== */
+    .timeline {
+        padding: 4rem 0;
+        background: var(--light-bg);
+    }
+
+    .timeline-item {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .timeline-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 24px;
+        top: 60px;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--primary-color), transparent);
+    }
+
+    .timeline-marker {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .timeline-content h4 {
+        font-size: 20px;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    .timeline-content p {
+        color: #6b7280;
+        margin-bottom: 0;
+    }
+
+    /* ==================== VALUES SECTION ==================== */
+    .values {
+        padding: 4rem 0;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-eyebrow {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+
+    .value-card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .value-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-8px);
+        border-color: var(--primary-color);
+    }
+
+    .value-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: var(--primary-color);
+    }
+
+    .value-card h3 {
+        font-size: 20px;
+        margin-bottom: 1rem;
+    }
+
+    .value-card p {
+        color: #6b7280;
+        margin-bottom: 0;
+        font-size: 15px;
+    }
+
+    /* ==================== TEAM SECTION ==================== */
+    .team {
+        padding: 4rem 0;
+        background: var(--light-bg);
+    }
+
+    .team-member {
+        text-align: center;
+    }
+
+    .member-image {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 1.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        color: var(--primary-color);
+        border: 3px solid white;
+        box-shadow: var(--shadow-md);
+    }
+
+    .member-name {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .member-role {
+        font-size: 14px;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .member-bio {
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    /* ==================== STATS ==================== */
+    .about-stats {
+        padding: 4rem 0;
+    }
+
+    .stat-card {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    .stat-number {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 800;
+        color: var(--primary-color);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 16px;
+        color: #6b7280;
+        font-weight: 600;
+    }
+
+    /* ==================== RESPONSIVENESS ==================== */
+    @media (max-width: 768px) {
+        .about-hero {
+            padding: 2rem 0;
+        }
+
+        .about-hero h1 {
+            font-size: 32px;
+        }
+
+        .about-placeholder {
+            padding: 2rem;
+            font-size: 50px;
+        }
+
+        .timeline-item {
+            gap: 1.5rem;
+        }
+
+        .timeline-marker {
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+        }
+
+        .member-image {
+            width: 120px;
+            height: 120px;
+            font-size: 50px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<section class="about-hero">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-6" data-aos="fade-up">
+                <h1>About Laundry Express</h1>
+                <p>We are pioneers in healthcare laundry management, transforming operations through advanced RFID technology and 15+ years of industry expertise. Our mission is to eliminate inefficiencies and provide hospitals with complete visibility and control over their linen assets.</p>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="about-placeholder">
+                    <i class="fas fa-hospital"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="timeline">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Our Journey</span>
+            <h2>Company Evolution</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker">2009</div>
+                    <div class="timeline-content">
+                        <h4>Foundation</h4>
+                        <p>Laundry Express was established with a vision to revolutionize healthcare laundry management through technology and expertise.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker">2012</div>
+                    <div class="timeline-content">
+                        <h4>RFID Implementation</h4>
+                        <p>Pioneered RFID technology adoption in healthcare laundry, starting with our first hospital partnership.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker">2016</div>
+                    <div class="timeline-content">
+                        <h4>Regional Expansion</h4>
+                        <p>Expanded operations across multiple states with 100+ hospitals and healthcare facilities as clients.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker">2020</div>
+                    <div class="timeline-content">
+                        <h4>Advanced Analytics</h4>
+                        <p>Launched comprehensive analytics platform providing real-time insights and predictive analytics.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker">2024</div>
+                    <div class="timeline-content">
+                        <h4>Current Leadership</h4>
+                        <p>Serving 500+ healthcare facilities with 10 million+ items tracked annually using our platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Our Values</span>
+            <h2>What We Stand For</h2>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>We are committed to delivering the highest quality solutions and services in healthcare laundry management.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Integrity</h3>
+                    <p>Transparency and honesty form the foundation of our relationships with clients and stakeholders.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>Continuous innovation drives us to create better, smarter solutions for evolving healthcare needs.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security</h3>
+                    <p>We prioritize data security and compliance with all healthcare regulations and standards.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-people-carry"></i>
+                    </div>
+                    <h3>Partnership</h3>
+                    <p>We work as true partners with our clients, aligning our success with theirs.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Sustainability</h3>
+                    <p>Environmental responsibility is core to our operations and service delivery.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="about-stats" style="background: var(--light-bg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card" data-aos="fade-up">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years of Experience</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Healthcare Partners</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number">10M+</div>
+                    <div class="stat-label">Items Tracked Annually</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Accuracy Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Meet Our Team</span>
+            <h2>Experienced Leaders</h2>
+            <p style="max-width: 600px; margin: 0 auto;">Our team comprises industry veterans with deep expertise in healthcare operations and technology.</p>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="team-member" data-aos="fade-up">
+                    <div class="member-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="member-name">Rajesh Kumar</div>
+                    <div class="member-role">Founder & CEO</div>
+                    <p class="member-bio">15+ years in healthcare operations management. Vision to digitalize laundry management across India.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="team-member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="member-name">Priya Sharma</div>
+                    <div class="member-role">COO</div>
+                    <p class="member-bio">Expert in process optimization and RFID implementation with proven track record in healthcare sector.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="member-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="member-name">Arjun Patel</div>
+                    <div class="member-role">CTO</div>
+                    <p class="member-bio">Technology innovator with expertise in IoT, RFID systems, and cloud infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-light));">
+    <div class="container" data-aos="fade-up">
+        <h2 style="color: white;">Join Our Growing Network</h2>
+        <p style="color: rgba(255, 255, 255, 0.9);">Partner with Laundry Express and transform your laundry operations today.</p>
+        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get in Touch</a>
+    </div>
+</section>
+{% endblock %}

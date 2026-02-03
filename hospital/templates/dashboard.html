@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Dashboard | RR Laundry{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">
+                <i class="fa-solid fa-hospital"></i> Hospital Dashboard
+            </h2>
+            <p class="text-muted">
+                Welcome, {{ request.user.username }}  
+                Manage linen requests, track status & history.
+            </p>
+        </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6>Total Requests</h6>
+                    <h3 class="fw-bold">120</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6>In Laundry</h6>
+                    <h3 class="fw-bold text-warning">45</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6>Delivered</h6>
+                    <h3 class="fw-bold text-success">65</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6>Pending</h6>
+                    <h3 class="fw-bold text-danger">10</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Quick Actions</h5>
+
+                    <a href="#" class="btn btn-primary me-2">
+                        <i class="fa-solid fa-plus"></i> New Linen Request
+                    </a>
+
+                    <a href="#" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-clock-rotate-left"></i> View History
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
