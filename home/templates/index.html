@@ -10,7 +10,11 @@
 <style>
     /* ==================== HERO SECTION ==================== */
     .hero {
-        background: linear-gradient(135deg, #f0f9ff 0%, #f3f4f6 100%);
+        position: relative;
+        background-image: url("/static/img/hero/herosection.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         padding: 4rem 0 3rem;
     }
 
@@ -19,12 +23,12 @@
         font-weight: 800;
         line-height: 1.2;
         margin-bottom: 1.5rem;
-        color: var(--primary-dark);
+        color: var(--primary-white);
     }
 
     .hero-content p {
         font-size: clamp(16px, 2vw, 18px);
-        color: #6b7280;
+        color: #e0e0e0;
         margin-bottom: 2rem;
         max-width: 600px;
     }
@@ -47,15 +51,6 @@
         box-shadow: var(--shadow-lg);
     }
 
-    .hero-placeholder {
-        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
-        border-radius: 12px;
-        padding: 4rem;
-        text-align: center;
-        font-size: 80px;
-        color: var(--primary-color);
-    }
-
     @media (max-width: 768px) {
         .hero {
             padding: 2rem 0;
@@ -76,32 +71,77 @@
 
     /* ==================== STATS SECTION ==================== */
     .stats {
-        background: var(--light-bg);
-        padding: 3rem 0;
+        padding: 120px 0;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .stats h2 {
+        font-size: 40px;
+        font-weight: 800;
+    }
+
+    .stats p {
+        margin-top: 10px;
+        font-weight: 600;
+        color: #374151;
     }
 
     .stat-card {
-        text-align: center;
-        padding: 2rem 1rem;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 40px 20px;
+        height: 100%;
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+        transition: all 0.4s ease;
     }
 
-    .stat-number {
-        font-size: clamp(32px, 5vw, 48px);
+    .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.15);
+    }
+
+    .stat-icon {
+        font-size: 36px;
+        margin-bottom: 16px;
+    }
+
+    .stat-card h2 {
+        font-size: 48px;
         font-weight: 800;
-        color: var(--primary-color);
-        line-height: 1;
-        margin-bottom: 0.5rem;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, #1e3a8a, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
-    .stat-label {
-        font-size: 16px;
-        color: #6b7280;
+    .stat-card p {
+        font-size: 15px;
         font-weight: 600;
+        color: #475569;
+    }
+
+    .counter {
+        font-size: 40px;
+        font-weight: 800;
+        color: #1e3a8a;
+    }
+
+    @media (max-width: 768px) {
+        .stats {
+            padding: 80px 0;
+        }
+
+        .stat-card h2 {
+            font-size: 40px;
+        }
     }
 
     /* ==================== SERVICES SECTION ==================== */
     .services {
-        padding: 4rem 0;
+        padding: 120px 0;
+        background:
+            radial-gradient(circle at top right, #e0f2fe 0%, transparent 40%),
+            linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
     }
 
     .section-header {
@@ -124,109 +164,215 @@
         margin-bottom: 1rem;
     }
 
+    .section-title span {
+        background: linear-gradient(90deg, #1e3a8a, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
     .section-subtitle {
-        font-size: 18px;
-        color: #6b7280;
-        max-width: 700px;
+        max-width: 720px;
         margin: 0 auto;
+        font-size: 17px;
+        color: #475569;
+        line-height: 1.6;
     }
 
     .service-card {
+        position: relative;
         background: #ffffff;
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 2rem;
-        text-align: center;
-        transition: all 0.3s ease;
+        border-radius: 22px;
+        overflow: hidden;
         height: 100%;
+        box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+        transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .service-card:hover {
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-8px);
-        border-color: var(--primary-color);
+        transform: translateY(-12px);
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.15);
     }
 
-    .service-icon {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 1.5rem;
-        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28px;
-        color: var(--primary-color);
+    .service-badge {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        background: #1e3a8a;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 20px;
+        z-index: 2;
     }
 
-    .service-card h3 {
-        font-size: 20px;
-        margin-bottom: 1rem;
+    .badge-green {
+        background: #22c55e;
     }
 
-    .service-card p {
-        color: #6b7280;
-        margin-bottom: 0;
-        font-size: 15px;
+    .badge-blue {
+        background: #2563eb;
     }
 
-    /* ==================== FEATURES SECTION ==================== */
-    .features {
-        background: var(--light-bg);
-        padding: 4rem 0;
+    .service-img {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
     }
 
-    .feature-list {
+    .service-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .service-card:hover .service-img img {
+        transform: scale(1.08);
+    }
+
+    .service-content {
+        padding: 34px;
+    }
+
+    .service-content h4 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 16px;
+    }
+
+    .service-content p {
+        font-size: 15.5px;
+        line-height: 1.8;
+        color: #334155;
+        margin-bottom: 14px;
+    }
+
+    @keyframes floatSoft {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+        100% { transform: translateY(0); }
+    }
+
+    .service-card:hover {
+        animation: floatSoft 3s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 34px;
+        }
+
+        .service-content {
+            padding: 26px;
+        }
+    }
+
+    /* ==================== HEALTHCARE FOCUS SECTION ==================== */
+    .focus {
+        padding: 120px 0;
+        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .focus-image-wrapper {
+        position: relative;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: 0 25px 70px rgba(15, 23, 42, 0.15);
+    }
+
+    .focus-img {
+        width: 100%;
+        border-radius: 26px;
+        transition: transform 0.6s ease;
+    }
+
+    .focus-image-wrapper:hover .focus-img {
+        transform: scale(1.05);
+    }
+
+    .focus-title {
+        font-size: 40px;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 18px;
+        color: #0f172a;
+    }
+
+    .focus-title span {
+        background: linear-gradient(90deg, #1e3a8a, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .focus-description {
+        font-size: 17px;
+        line-height: 1.75;
+        color: #475569;
+        margin-bottom: 28px;
+    }
+
+    .focus-features {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin-top: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 20px;
     }
 
-    .feature-item {
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-
-    .feature-icon {
-        flex-shrink: 0;
-        width: 40px;
-        height: 40px;
-        background: rgba(34, 197, 94, 0.1);
-        border-radius: 50%;
+    .focus-feature {
         display: flex;
         align-items: center;
-        justify-content: center;
-        color: var(--success-color);
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    .feature-text h4 {
-        font-size: 16px;
-        margin-bottom: 0.5rem;
+        gap: 10px;
+        padding: 12px 16px;
+        background: #ffffff;
+        border-radius: 14px;
+        font-size: 15px;
         font-weight: 600;
+        color: #0f172a;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        transition: all 0.3s ease;
     }
 
-    .feature-text p {
-        color: #6b7280;
-        margin-bottom: 0;
-        font-size: 14px;
+    .focus-feature span {
+        color: #22c55e;
+        font-size: 16px;
+    }
+
+    .focus-feature:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+    }
+
+    @media (max-width: 768px) {
+        .focus {
+            padding: 80px 0;
+        }
+
+        .focus-title {
+            font-size: 32px;
+        }
+
+        .focus-features {
+            grid-template-columns: 1fr;
+        }
     }
 
     /* ==================== PROCESS SECTION ==================== */
     .process {
-        padding: 4rem 0;
+        padding: 120px 0;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     }
 
     .process-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3rem;
         align-items: center;
-        margin-bottom: 4rem;
+        gap: 60px;
+        margin-bottom: 80px;
     }
 
     .process-row.reverse {
@@ -238,52 +384,56 @@
     }
 
     .process-content {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .step-badge {
-        display: inline-flex;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-        color: #ffffff;
-        border-radius: 50%;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: 800;
-        margin-bottom: 1rem;
+        position: relative;
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 22px;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
     }
 
     .process-content h4 {
         font-size: 22px;
-        margin-bottom: 1rem;
         font-weight: 700;
+        margin-bottom: 12px;
+        color: #0f172a;
     }
 
     .process-content p {
-        color: #6b7280;
         font-size: 16px;
+        line-height: 1.75;
+        color: #475569;
     }
 
-    .process-image {
-        text-align: center;
+    .step-badge {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #1e3a8a, #22c55e);
+        color: #ffffff;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 12px 30px rgba(30, 58, 138, 0.4);
     }
 
-    .process-placeholder {
-        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
-        border-radius: 12px;
-        padding: 2rem;
-        text-align: center;
-        font-size: 60px;
-        color: var(--primary-color);
+    .process-image img {
+        width: 100%;
+        border-radius: 22px;
+        box-shadow: 0 25px 70px rgba(15, 23, 42, 0.15);
+        transition: transform 0.6s ease;
     }
 
-    @media (max-width: 768px) {
+    .process-image img:hover {
+        transform: scale(1.04);
+    }
+
+    @media (max-width: 992px) {
         .process-row {
             grid-template-columns: 1fr;
-            gap: 2rem;
         }
 
         .process-row.reverse {
@@ -291,39 +441,65 @@
         }
 
         .step-badge {
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
+            left: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .process {
+            padding: 80px 0;
         }
 
-        .process-content h4 {
-            font-size: 18px;
-        }
-
-        .process-placeholder {
-            padding: 1.5rem;
-            font-size: 45px;
+        .process-row {
+            gap: 40px;
+            margin-bottom: 60px;
         }
     }
 
     /* ==================== CTA SECTION ==================== */
     .cta {
-        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-        color: white;
-        padding: 4rem 0;
+        padding: 100px 0;
+        background: linear-gradient(135deg, #0b1f3a, #0e2a47);
+        position: relative;
+        overflow: hidden;
         text-align: center;
     }
 
+    .cta::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.25), transparent 70%);
+        top: -100px;
+        right: -100px;
+    }
+
+    .cta-box {
+        max-width: 850px;
+        margin: auto;
+        padding: 60px 40px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    }
+
     .cta h2 {
-        color: white;
-        font-size: clamp(28px, 5vw, 42px);
-        margin-bottom: 1rem;
+        font-size: 42px;
+        font-weight: 800;
+        color: #ffffff;
+    }
+
+    .cta h2 span {
+        color: #22c55e;
     }
 
     .cta p {
-        color: rgba(255, 255, 255, 0.9);
+        margin-top: 18px;
         font-size: 18px;
-        margin-bottom: 2rem;
+        color: #d1d5db;
+        line-height: 1.6;
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
@@ -370,29 +546,49 @@
 <!-- Stats Section -->
 <section class="stats" id="stats">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-number counter" data-target="500">0</div>
-                    <div class="stat-label">Healthcare Facilities</div>
+        <!-- Section Header -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-eyebrow">Trusted Impact</span>
+            <h2 class="section-title">
+                Proven Results Across<br />
+                <span>Healthcare Operations</span>
+            </h2>
+        </div>
+
+        <div class="row g-4 text-center">
+            <!-- Stat 1 -->
+            <div class="col-md-3" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon">🏥</div>
+                    <h2 class="counter" data-target="50">0</h2>
+                    <p>Hospitals Served</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-number counter" data-target="10">0</div>
-                    <div class="stat-label">Million+ Items Tracked</div>
+
+            <!-- Stat 2 -->
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
+                    <div class="stat-icon">📉</div>
+                    <h2 class="counter" data-target="40">0</h2>
+                    <p>Linen Loss Reduced (%)</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-number counter" data-target="99">0</div>
-                    <div class="stat-label">% Accuracy Rate</div>
+
+            <!-- Stat 3 -->
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
+                    <div class="stat-icon">🧼</div>
+                    <h2 class="counter" data-target="100">0</h2>
+                    <p>Hygiene Compliance (%)</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-number counter" data-target="15">0</div>
-                    <div class="stat-label">Years Experience</div>
+
+            <!-- Stat 4 -->
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <h2 class="counter" data-target="24">0</h2>
+                    <p>Operational Support (hrs)</p>
                 </div>
             </div>
         </div>
@@ -400,234 +596,258 @@
 </section>
 
 <!-- Services Section -->
-<section class="services">
+<section class="services" id="services">
     <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-eyebrow">Our Services</span>
-            <h2 class="section-title">Comprehensive Solutions</h2>
-            <p class="section-subtitle">From linen tagging to delivery, our complete RFID platform manages every aspect of your laundry operations.</p>
+        <!-- Section Heading -->
+        <div class="section-header text-center mb-5" data-aos="fade-up">
+            <span class="section-eyebrow">What We Deliver</span>
+
+            <h2 class="section-title">
+                Intelligent Laundry Services for<br />
+                <span>Healthcare & Institutions</span>
+            </h2>
+
+            <p class="section-subtitle">
+                We combine healthcare-grade processes, smart technology, and operational expertise to deliver safe, efficient, and sustainable laundry solutions trusted by leading hospitals and institutions.
+            </p>
         </div>
 
-        <div class="row gy-4">
-            <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tag"></i>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-4" data-aos="zoom-in-up">
+                <div class="service-card service-card-large">
+                    <span class="service-badge">Healthcare</span>
+
+                    <div class="service-img">
+                        <img src="{% static 'img/services/HealthCareLaundry.png' %}" alt="Healthcare Laundry Processing" />
                     </div>
-                    <h3>RFID Tagging & Onboarding</h3>
-                    <p>Complete linen tagging with advanced RFID technology for unique digital identity and tracking.</p>
+
+                    <div class="service-content">
+                        <h4>Healthcare Laundry Processing</h4>
+
+                        <p>
+                            Specialized hospital-grade laundry processing that follows strict infection control protocols, ensuring patient safety and clinical hygiene.
+                        </p>
+
+                        <p>
+                            Controlled wash formulas, segregation workflows, and hygienic finishing processes ensure consistent quality across every cycle while protecting fabric integrity.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-arrows-alt"></i>
+            <!-- Card 2 -->
+            <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="150">
+                <div class="service-card service-card-large">
+                    <span class="service-badge badge-green">RFID</span>
+
+                    <div class="service-img">
+                        <img src="{% static 'img/services/rfid-linen.png' %}" alt="RFID Linen Management" />
                     </div>
-                    <h3>Real-Time Tracking</h3>
-                    <p>Monitor linen movement across all locations with instant updates and accurate inventory management.</p>
+
+                    <div class="service-content">
+                        <h4>RFID Linen Management</h4>
+
+                        <p>
+                            End-to-end RFID-based tracking delivers real-time visibility of linen movement, usage patterns, and lifecycle status.
+                        </p>
+
+                        <p>
+                            Hospitals reduce linen loss, improve accountability, and gain data-backed insights to optimize inventory and costs.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3>Quality Assurance</h3>
-                    <p>Rigorous quality checks and compliance with healthcare standards on every batch.</p>
-                </div>
-            </div>
+            <!-- Card 3 -->
+            <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="service-card service-card-large">
+                    <span class="service-badge badge-blue">Operations</span>
 
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="service-img">
+                        <img src="{% static 'img/services/operationsAndSupport.png' %}" alt="Operations & Support" />
                     </div>
-                    <h3>Analytics & Reporting</h3>
-                    <p>Comprehensive dashboards, audit logs, and consumption analytics for complete visibility.</p>
-                </div>
-            </div>
 
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Dedicated support team available round the clock for operational assistance and training.</p>
-                </div>
-            </div>
+                    <div class="service-content">
+                        <h4>Operations & Support</h4>
 
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-lock"></i>
+                        <p>
+                            Dedicated operational teams, performance audits, and SLA-driven workflows ensure smooth, uninterrupted laundry operations.
+                        </p>
+
+                        <p>
+                            Continuous optimization, reporting dashboards, and proactive support make us a long-term healthcare operations partner.
+                        </p>
                     </div>
-                    <h3>Secure Management</h3>
-                    <p>Enterprise-grade security with complete audit trails and regulatory compliance.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="features" id="features">
+<!-- Healthcare Focus Section -->
+<section class="focus">
     <div class="container">
-        <div class="row gy-4 align-items-center">
-            <div class="col-lg-6" data-aos="fade-up">
-                <div class="hero-placeholder">
-                    <i class="fas fa-clipboard-check"></i>
+        <div class="row align-items-center gy-5">
+            <!-- IMAGE -->
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="focus-image-wrapper">
+                    <img src="{% static 'img/hero/hero-img-5.jpg' %}" alt="Why Hospitals Choose Laundry Express" class="focus-img" />
                 </div>
             </div>
 
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <h2>Why Choose Laundry Express?</h2>
-                <p style="color: #6b7280;">Experience the most advanced linen management system with proven results in healthcare operations.</p>
+            <!-- CONTENT -->
+            <div class="col-lg-6" data-aos="fade-left">
+                <span class="section-eyebrow">Why Laundry Express</span>
 
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">
-                            <h4>End-to-End RFID Implementation</h4>
-                            <p>Complete digital lifecycle tracking from tagging to delivery</p>
-                        </div>
+                <h2 class="focus-title">
+                    Why Hospitals Choose<br />
+                    <span>Laundry Express</span>
+                </h2>
+
+                <p class="focus-description">
+                    Laundry Express is more than a laundry service provider. We are a technology-driven healthcare operations partner, helping hospitals gain complete control, visibility, and accountability across their linen lifecycle.
+                </p>
+
+                <div class="focus-features">
+                    <div class="focus-feature">
+                        <span>✔</span> End-to-End RFID Linen Management Implementation
                     </div>
 
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">
-                            <h4>Deep Healthcare Expertise</h4>
-                            <p>15+ years of specialized experience in hospital laundry management</p>
-                        </div>
+                    <div class="focus-feature">
+                        <span>✔</span> Deep Healthcare & Hospital Laundry Domain Expertise
                     </div>
 
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">
-                            <h4>Scalable Technology</h4>
-                            <p>Enterprise-ready platform handling millions of items</p>
-                        </div>
+                    <div class="focus-feature">
+                        <span>✔</span> Scalable, Secure & Enterprise-Ready Technology Platform
                     </div>
 
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">
-                            <h4>Complete Compliance</h4>
-                            <p>Full audit trails and regulatory compliance ready</p>
-                        </div>
+                    <div class="focus-feature">
+                        <span>✔</span> Dedicated Onboarding, Training & 24×7 Operational Support
                     </div>
 
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">
-                            <h4>Custom Workflows</h4>
-                            <p>Tailored to your hospital's specific requirements</p>
-                        </div>
+                    <div class="focus-feature">
+                        <span>✔</span> Customizable Workflows Aligned to Hospital Operations
+                    </div>
+
+                    <div class="focus-feature">
+                        <span>✔</span> Data Security, Audit Trails & Compliance-Ready Reporting
                     </div>
                 </div>
+
+                <p class="focus-description mt-4">
+                    <strong>
+                        We don't just wash linen — we transform hospital laundry operations with technology, transparency, and trust.
+                    </strong>
+                </p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Process Section -->
-<section class="process" id="process">
+<section class="process">
     <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-eyebrow">LMS Workflow</span>
-            <h2 class="section-title">How Our System Works</h2>
-            <p class="section-subtitle">A fully digital, RFID-enabled linen lifecycle management system designed to eliminate losses and improve efficiency.</p>
+        <!-- Section Header -->
+        <div class="text-center mb-5">
+            <span class="section-eyebrow" data-aos="fade-up">LMS Workflow</span>
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">
+                How Our RFID Linen Management<br />
+                <span>System Works</span>
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+                A fully digital, RFID-enabled linen lifecycle management system designed to eliminate losses, improve hygiene compliance, and deliver complete operational transparency.
+            </p>
         </div>
 
-        <!-- Step 1 -->
+        <!-- STEP 1 -->
         <div class="process-row" data-aos="fade-up">
             <div class="process-content">
                 <div class="step-badge">1</div>
                 <h4>Linen Tagging & Onboarding</h4>
-                <p>New linen is tagged with RFID technology, creating a unique digital identity. Each piece is registered in the system for complete lifecycle tracking.</p>
+                <p>
+                    New linen is either pre-tagged by the manufacturer or tagged at the hospital using RFID technology. Each linen piece is digitally defined and added to the system using RFID tabletop readers, creating a unique identity for lifecycle tracking.
+                </p>
             </div>
             <div class="process-image">
-                <div class="process-placeholder">
-                    <i class="fas fa-tag"></i>
-                </div>
+                <img src="{% static 'img/healthcare/collection.png' %}" alt="RFID Linen Tagging" />
             </div>
         </div>
 
-        <!-- Step 2 -->
+        <!-- STEP 2 -->
         <div class="process-row reverse" data-aos="fade-up">
             <div class="process-content">
                 <div class="step-badge">2</div>
                 <h4>Issue & Movement Tracking</h4>
-                <p>Linen distribution to departments is automatically recorded. Every movement is tracked in real-time, maintaining accurate inventory.</p>
+                <p>
+                    Linen issued to departments is automatically recorded using fixed or handheld RFID readers. Every movement — issue, return, or transfer — is synced in real time with the hospital's linen database.
+                </p>
             </div>
             <div class="process-image">
-                <div class="process-placeholder">
-                    <i class="fas fa-arrows-alt"></i>
-                </div>
+                <img src="{% static 'img/healthcare/rfidTracking.png' %}" alt="RFID Linen Movement Tracking" />
             </div>
         </div>
 
-        <!-- Step 3 -->
+        <!-- STEP 3 -->
         <div class="process-row" data-aos="fade-up">
             <div class="process-content">
                 <div class="step-badge">3</div>
                 <h4>Soiled Linen Collection</h4>
-                <p>Used linen arrives at our facility and is automatically scanned. Manual counting is eliminated, ensuring faster intake.</p>
+                <p>
+                    Soiled linen received at the laundry facility is automatically scanned and logged into the system. Manual counting is completely eliminated, ensuring faster intake, accuracy, and zero reconciliation errors.
+                </p>
             </div>
             <div class="process-image">
-                <div class="process-placeholder">
-                    <i class="fas fa-cubes"></i>
-                </div>
+                <img src="{% static 'img/healthcare/soiledLinen.png' %}" alt="Soiled Linen Collection" />
             </div>
         </div>
 
-        <!-- Step 4 -->
+        <!-- STEP 4 -->
         <div class="process-row reverse" data-aos="fade-up">
             <div class="process-content">
                 <div class="step-badge">4</div>
-                <h4>Hospital-Grade Washing</h4>
-                <p>All linen undergoes validated washing processes compliant with infection control standards. Each cycle is digitally documented.</p>
+                <h4>Washing & Processing</h4>
+                <p>
+                    Hospital-grade washing, drying, and finishing are performed using validated processes. Each wash cycle is digitally tracked to ensure compliance with infection control protocols and quality benchmarks.
+                </p>
             </div>
             <div class="process-image">
-                <div class="process-placeholder">
-                    <i class="fas fa-droplet"></i>
-                </div>
+                <img src="{% static 'img/healthcare/processing.png' %}" alt="Laundry Washing & Processing" />
             </div>
         </div>
 
-        <!-- Step 5 -->
+        <!-- STEP 5 -->
         <div class="process-row" data-aos="fade-up">
             <div class="process-content">
                 <div class="step-badge">5</div>
-                <h4>Quality Inspection</h4>
-                <p>Every item is inspected for quality, hygiene, and safety standards before dispatch. Only approved batches are released.</p>
+                <h4>Quality Check</h4>
+                <p>
+                    Every processed linen item undergoes inspection before dispatch. Quality checks ensure hygiene standards, fabric safety, and service consistency across every batch.
+                </p>
             </div>
             <div class="process-image">
-                <div class="process-placeholder">
-                    <i class="fas fa-check-double"></i>
-                </div>
+                <img src="{% static 'img/healthcare/quality_check.png' %}" alt="Laundry Quality Check" />
             </div>
         </div>
 
-        <!-- Step 6 -->
+        <!-- STEP 6 -->
         <div class="process-row reverse" data-aos="fade-up">
             <div class="process-content">
                 <div class="step-badge">6</div>
                 <h4>Delivery & Reporting</h4>
-                <p>Clean linen is delivered with complete digital records and audit logs. Full transparency and accountability ensured.</p>
+                <p>
+                    Clean linen is delivered back to the hospital along with complete digital records, audit logs, consumption analytics, and performance reports—ensuring total accountability and visibility.
+                </p>
             </div>
             <div class="process-image">
-                <div class="process-placeholder">
-                    <i class="fas fa-truck"></i>
-                </div>
+                <img src="{% static 'img/healthcare/delivery.png' %}" alt="Laundry Delivery & Reports" />
             </div>
         </div>
 
+        <!-- RESULT -->
         <div class="text-center mt-5" data-aos="fade-up">
-            <p style="color: #6b7280; font-size: 18px;">
-                <strong>Result:</strong> Faster turnaround, zero manual errors, and complete accountability across the entire linen lifecycle.
+            <p class="section-subtitle">
+                👉 <strong>Result:</strong> Faster turnaround, zero manual errors, and complete accountability across the entire linen lifecycle.
             </p>
         </div>
     </div>
@@ -636,9 +856,11 @@
 <!-- CTA Section -->
 <section class="cta" data-aos="fade-up" id="contact">
     <div class="container">
-        <h2>Ready to Transform Your Laundry Operations?</h2>
-        <p>Join healthcare facilities across the region who are already benefiting from advanced linen management technology.</p>
-        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Schedule a Demo</a>
+        <div class="cta-box">
+            <h2>Ready to Transform Your Laundry Operations?</h2>
+            <p>Join healthcare facilities across the region who are already benefiting from advanced linen management technology.</p>
+            <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Schedule a Demo</a>
+        </div>
     </div>
 </section>
 {% endblock %}

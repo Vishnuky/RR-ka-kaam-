@@ -4,8 +4,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Laundry Express - Advanced RFID-enabled healthcare laundry management solutions">
-  <meta name="keywords" content="RFID, laundry management, healthcare">
+    <meta name="description" content="Laundry Express - Advanced RFID-enabled healthcare laundry management solutions">
+    <meta name="keywords" content="RFID, laundry management, healthcare">
 
     <title>
       {% block title %}Laundry Express | Healthcare Laundry Solutions {% endblock %}
@@ -191,8 +191,8 @@
       .top-bar {
           background: linear-gradient(90deg, #0b2545, #0f2f5f);
           color: #ffffff;
-          font-size: 13px;
-          padding: 8px 0;
+          font-size: 14px;
+          padding: 10px 0;
       }
 
       .top-bar .container {
@@ -200,32 +200,29 @@
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
-          gap: 1rem;
       }
 
       .top-left {
           display: flex;
           align-items: center;
-          gap: 0;
       }
 
       .top-item {
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 0 8px;
+          gap: 8px;
           opacity: 0.95;
       }
 
       .top-item i {
-          font-size: 12px;
+          font-size: 14px;
       }
 
       .top-divider {
           width: 1px;
           height: 16px;
-          background: rgba(255, 255, 255, 0.3);
-          margin: 0 4px;
+          background: rgba(255, 255, 255, 0.35);
+          margin: 0 16px;
       }
 
       .top-link {
@@ -241,9 +238,13 @@
           text-decoration: underline;
       }
 
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
           .top-bar {
-              font-size: 12px;
+              font-size: 13px;
+          }
+
+          .top-left {
+              gap: 12px;
           }
 
           .top-divider {
@@ -270,23 +271,34 @@
 
       .navbar {
           padding: 0;
+          background-color: white;
       }
 
       .navbar-brand {
           font-size: 20px;
           font-weight: 700;
           color: var(--primary-color) !important;
+          display: flex;
+          align-items: center;
       }
 
       .navbar-brand i {
           margin-right: 0.5rem;
+          font-size: 24px;
+      }
+
+      .navbar-logo {
+          height: 50px;
+          width: auto;
+          max-width: 200px;
       }
 
       .nav-link {
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 600;
           color: var(--primary-dark) !important;
           padding: 0.5rem 1rem !important;
+          margin-left: 0.5rem;
           position: relative;
           transition: color 0.3s ease;
       }
@@ -337,9 +349,53 @@
           color: var(--primary-color) !important;
       }
 
+      /* Mobile Navigation */
+      .mobile-top-bar {
+          display: none;
+          padding: 14px 0;
+          border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+          margin-bottom: 10px;
+      }
+
+      .mobile-top-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #0f172a;
+          padding: 8px 0;
+      }
+
+      .mobile-top-item i {
+          color: #2563eb;
+          font-size: 14px;
+      }
+
+      .mobile-top-link {
+          color: #2563eb;
+          font-weight: 600;
+          text-decoration: none;
+      }
+
+      @media (min-width: 992px) {
+          .mobile-top-bar {
+              display: none;
+          }
+      }
+
       @media (max-width: 991px) {
+          .top-bar {
+              display: none;
+          }
+
+          .mobile-top-bar {
+              display: block;
+          }
+
           .nav-link {
               padding: 0.75rem 0 !important;
+              margin-left: 0;
               border-bottom: 1px solid var(--border-color);
           }
 
@@ -350,13 +406,17 @@
           .navbar-collapse {
               padding-top: 1rem;
           }
+
+          .navbar-logo {
+              height: 40px;
+          }
       }
 
       /* ==================== FOOTER ==================== */
       .footer {
-          background: var(--primary-dark);
-          color: #e5e7eb;
-          padding: 3rem 0 1rem;
+          background: linear-gradient(135deg, var(--primary-dark) 0%, #1e293b 100%);
+          color: #cbd5f5;
+          padding: 80px 0 30px;
           margin-top: auto;
       }
 
@@ -364,17 +424,19 @@
           color: white;
           font-weight: 700;
           margin-bottom: 1.5rem;
-          font-size: 16px;
+          font-size: 18px;
       }
 
       .footer-text {
-          font-size: 14px;
-          color: #d1d5db;
-          line-height: 1.6;
+          font-size: 15px;
+          color: #cbd5f5;
+          line-height: 1.7;
       }
 
       .footer-links {
           list-style: none;
+          padding: 0;
+          margin: 0;
       }
 
       .footer-links li {
@@ -382,28 +444,30 @@
       }
 
       .footer-links a {
-          color: #d1d5db;
+          color: #cbd5f5;
           text-decoration: none;
           transition: color 0.3s ease;
-          font-size: 14px;
+          font-size: 15px;
       }
 
       .footer-links a:hover {
-          color: white;
+          color: var(--success-color);
       }
 
       .footer-contact {
           list-style: none;
-          font-size: 14px;
+          padding: 0;
+          margin: 0;
+          font-size: 15px;
       }
 
       .footer-contact li {
           margin-bottom: 0.75rem;
-          color: #d1d5db;
+          color: #cbd5f5;
       }
 
       .footer-contact a {
-          color: #d1d5db;
+          color: #cbd5f5;
           text-decoration: none;
           transition: color 0.3s ease;
       }
@@ -414,12 +478,12 @@
 
       .footer-social {
           display: flex;
-          gap: 1rem;
+          gap: 12px;
       }
 
       .footer-social a {
-          width: 40px;
-          height: 40px;
+          width: 42px;
+          height: 42px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -427,54 +491,34 @@
           color: white;
           border-radius: 50%;
           transition: all 0.3s ease;
+          text-decoration: none;
       }
 
       .footer-social a:hover {
-          background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+          background: linear-gradient(135deg, var(--primary-color), var(--success-color));
           transform: translateY(-3px);
       }
 
       .footer-bottom {
           text-align: center;
-          padding-top: 2rem;
+          padding-top: 20px;
+          margin-top: 50px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
-          color: #9ca3af;
+          color: #94a3b8;
           font-size: 14px;
       }
 
       @media (max-width: 768px) {
           .footer {
-              padding: 2rem 0 1rem;
+              padding: 60px 0 20px;
           }
 
           .footer-title {
               margin-bottom: 1rem;
           }
-      }
 
-      /* ==================== DARK MODE ==================== */
-      @media (prefers-color-scheme: dark) {
-          :root {
-              --text-color: #f9fafb;
-              --light-bg: #1f2937;
-              --border-color: rgba(255, 255, 255, 0.1);
-          }
-
-          body {
-              background-color: #111827;
-              color: var(--text-color);
-          }
-
-          .footer {
-              background-color: #0f172a;
-          }
-
-          .nav-link {
-              color: #f3f4f6 !important;
-          }
-
-          .main-header {
-              background: rgba(15, 23, 42, 0.95);
+          .footer-social {
+              justify-content: flex-start;
           }
       }
 
@@ -511,8 +555,8 @@
           </div>
           <div class="top-divider"></div>
           <div class="top-item">
-            <i class="fas fa-envelope"></i>
-            <span>info@laundryexpress.in</span>
+            <i class="fas fa-clock"></i>
+            <span>Mon – Sat, 9:00 AM – 7:00 PM</span>
           </div>
         </div>
         <div>
@@ -526,7 +570,7 @@
     {% block navbar %}
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
+        <div class="container">
           <a class="navbar-brand" href="{% url 'home' %}">
             <i class="fas fa-water"></i> Laundry Express
           </a>
@@ -542,7 +586,22 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <!-- Mobile Top Bar (Inside Hamburger Menu) -->
+            <div class="mobile-top-bar">
+              <div class="mobile-top-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 9XXXXXXXXX</span>
+              </div>
+              <div class="mobile-top-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon – Sat, 9:00 AM – 7:00 PM</span>
+              </div>
+              <div class="mobile-top-item">
+                <a href="{% url 'home' %}" class="mobile-top-link">Home</a>
+              </div>
+            </div>
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'home' %}">Home</a>
               </li>
@@ -573,7 +632,6 @@
                   class="dropdown-menu dropdown-menu-end"
                   aria-labelledby="userMenu"
                 >
-                  <!-- ROLE BASED DASHBOARD -->
                   <li>
                     {% if user.groups.all.0.name == "Hospital" %}
                     <a
@@ -581,27 +639,10 @@
                       href="{% url 'hospital:dashboard' %}"
                       >Dashboard</a
                     >
-
-                    <!-- {% elif user.groups.all.0.name == "Laundry" %}
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'laundary:dashboard' %}"
-                      >Dashboard</a
-                    >
-
-                    {% elif user.groups.all.0.name == "Delivery" %}
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'delivery:dashboard' %}"
-                      >Dashboard</a
-                    >
-                    {% endif %} -->
+                    {% endif %}
                   </li>
-
                   <li>
-                    <a class="dropdown-item" href="#"
-                      >Profile</a
-                    >
+                    <a class="dropdown-item" href="#">Profile</a>
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
@@ -612,7 +653,7 @@
                 </ul>
               </li>
               {% else %}
-              <li class="nav-item ms-2">
+              <li class="nav-item ms-lg-3">
                 <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
               </li>
               {% endif %}
@@ -634,22 +675,23 @@
     {% block footer %}
     <footer class="footer">
       <div class="container">
-        <div class="row gy-4 mb-4">
+        <div class="row gy-4">
           <!-- Company Info -->
-          <div class="col-12 col-sm-6 col-lg-4">
-            <h5 class="footer-title">RR Laundary</h5>
+          <div class="col-lg-4 col-md-6">
+            <h5 class="footer-title">Laundry Express</h5>
             <p class="footer-text">
               Specialized healthcare & institutional laundry management
               solutions with RFID technology.
             </p>
             <p class="footer-text">
               <strong>Address:</strong><br />
-              Gurugram, Haryana, India"
+              VPO Dhankot, Dwarka Expressway,<br />
+              Sector 99, Gurugram – 122006
             </p>
           </div>
 
           <!-- Quick Links -->
-          <div class="col-12 col-sm-6 col-lg-2">
+          <div class="col-lg-2 col-md-6">
             <h5 class="footer-title">Quick Links</h5>
             <ul class="footer-links">
               <li><a href="{% url 'home' %}">Home</a></li>
@@ -661,7 +703,7 @@
           </div>
 
           <!-- Contact Details -->
-          <div class="col-12 col-sm-6 col-lg-3">
+          <div class="col-lg-3 col-md-6">
             <h5 class="footer-title">Contact Details</h5>
             <ul class="footer-contact">
               <li><strong>Phone:</strong> +91 9XXXXXXXXX</li>
@@ -671,15 +713,14 @@
                   >info@laundryexpress.in</a
                 >
               </li>
-              <li><strong>Hours:</strong> Mon – Fri, 9:00 AM – 6:00 PM</li>
+              <li><strong>Hours:</strong> Mon – Sat, 9:00 AM – 7:00 PM</li>
             </ul>
           </div>
 
           <!-- Social Links -->
-          <div class="col-12 col-sm-6 col-lg-3">
+          <div class="col-lg-3 col-md-6">
             <h5 class="footer-title">Follow Us</h5>
             <div class="footer-social">
-              {% if social_linkedin %}
               <a
                 href="#"
                 aria-label="LinkedIn"
@@ -689,7 +730,6 @@
               >
                 <i class="fab fa-linkedin"></i>
               </a>
-              {% endif %} {% if social_facebook %}
               <a
                 href="#"
                 aria-label="Facebook"
@@ -699,7 +739,6 @@
               >
                 <i class="fab fa-facebook"></i>
               </a>
-              {% endif %} {% if social_instagram %}
               <a
                 href="#"
                 aria-label="Instagram"
@@ -709,7 +748,6 @@
               >
                 <i class="fab fa-instagram"></i>
               </a>
-              {% endif %} {% if social_twitter %}
               <a
                 href="#"
                 aria-label="Twitter"
@@ -719,14 +757,13 @@
               >
                 <i class="fab fa-twitter"></i>
               </a>
-              {% endif %}
             </div>
           </div>
         </div>
 
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-          <p>&copy; {% now 'Y' %} RR Laundary. All Rights Reserved.</p>
+          <p>&copy; {% now 'Y' %} Laundry Express. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
