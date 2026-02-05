@@ -1,306 +1,452 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Services - Laundry Express | Complete Laundry Management Solutions{% endblock %}
-{% block meta_description %}Explore our comprehensive RFID-enabled laundry services including tracking, quality assurance, analytics, and 24/7 support.{% endblock %}
+{% block title %}Services - Laundry Express | Healthcare Laundry Solutions{% endblock %}
+{% block meta_description %}Comprehensive RFID-enabled healthcare laundry services including processing, tracking, and managed operations for hospitals and institutions.{% endblock %}
 
 {% block nav_services_active %}active{% endblock %}
 
 {% block extra_css %}
 <style>
-    /* ==================== SERVICES HERO ==================== */
+    html { scroll-behavior: smooth; }
+
+    /* ================= HERO ================= */
     .services-hero {
-        background: linear-gradient(135deg, #f0f9ff 0%, #f3f4f6 100%);
-        padding: 4rem 0 3rem;
+        position: relative;
+        min-height: 85vh;
+        padding: 100px 0 120px;
+        background: url("{% static 'img/hero/63f54924fc7ef34ed0b4462c04e3a768.jpg' %}") center/cover;
     }
-
+    .services-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.75);
+    }
+    .services-hero .container { position: relative; z-index: 2; }
     .services-hero h1 {
-        font-size: clamp(32px, 6vw, 56px);
+        font-size: 52px;
         font-weight: 800;
-        margin-bottom: 1.5rem;
-        color: var(--primary-dark);
+        line-height: 1.1;
+        color: #ffffff;
     }
-
+    .services-hero h1 span { color: #22c55e; }
     .services-hero p {
+        margin-top: 20px;
         font-size: 18px;
-        color: #6b7280;
-        max-width: 600px;
+        color: #cbd5f5;
+        line-height: 1.7;
     }
 
-    /* ==================== SERVICE DETAILS SECTION ==================== */
-    .service-detail {
-        padding: 4rem 0;
+    /* ================= SECTIONS ================= */
+    section {
+        padding: 100px 0;
+        scroll-margin-top: 100px;
+    }
+    section:nth-of-type(even) { background: #f8fafc; }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .section-eyebrow {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 6px 16px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #16a34a;
+        background: rgba(34, 197, 94, 0.12);
+        border-radius: 20px;
+    }
+    .section-title {
+        font-size: 44px;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1.15;
+        margin-bottom: 18px;
+    }
+    .section-title span {
+        background: linear-gradient(90deg, #1e3a8a, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .section-subtitle {
+        font-size: 18px;
+        line-height: 1.75;
+        color: #475569;
+        max-width: 720px;
+        margin: 0 auto;
     }
 
-    .service-detail:nth-child(even) {
-        background: var(--light-bg);
+    /* ================= CARDS ================= */
+    .card {
+        background: #ffffff;
+        border-radius: 22px;
+        overflow: hidden;
+        height: 100%;
+        box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+        transition: all 0.45s ease;
+    }
+    .card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.15);
+    }
+    .card-badge {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        background: #1e3a8a;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 20px;
+        z-index: 2;
+    }
+    .badge-green { background: #22c55e; }
+    .badge-blue { background: #2563eb; }
+    
+    .card-img {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+    }
+    .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    .card:hover .card-img img { transform: scale(1.08); }
+    
+    .card-content { padding: 34px; }
+    .card-content h4 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 16px;
+    }
+    .card-content p {
+        font-size: 15.5px;
+        line-height: 1.8;
+        color: #334155;
+        margin-bottom: 14px;
     }
 
-    .service-detail-row {
+    /* ================= STAT CARDS ================= */
+    .stat-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 40px 20px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+        transition: all 0.4s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.15);
+    }
+    .stat-card h2 {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, #1e3a8a, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .stat-card p {
+        font-size: 15px;
+        font-weight: 600;
+        color: #475569;
+    }
+
+    /* ================= TWO COLUMN LAYOUT ================= */
+    .two-col {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        gap: 60px;
         align-items: center;
     }
-
-    .service-detail-row.reverse {
-        direction: rtl;
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+    
+    .img-wrapper {
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(15, 23, 42, 0.15);
+        height: 50%;
     }
-
-    .service-detail-row.reverse > * {
-        direction: ltr;
+    .img-wrapper img {
+        width: 100%;
+        border-radius: 26px;
+        transition: transform 0.6s ease;
+    
     }
+    .img-wrapper:hover img { transform: scale(1.05); }
 
-    .service-image {
-        background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
-        border-radius: 12px;
-        padding: 3rem;
-        text-align: center;
-        font-size: 80px;
-        color: var(--primary-color);
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 20px;
+        margin-top: 28px;
     }
-
-    .service-detail h2 {
-        font-size: clamp(28px, 5vw, 42px);
-        margin-bottom: 1.5rem;
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        background: #ffffff;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #0f172a;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        transition: all 0.3s ease;
     }
-
-    .service-detail p {
-        color: #6b7280;
-        font-size: 16px;
-        margin-bottom: 1.5rem;
+    .feature-item span { color: #22c55e; font-size: 16px; }
+    .feature-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
     }
 
     .feature-list {
         list-style: none;
-        margin: 2rem 0;
+        margin: 24px 0 0 0;
+        padding: 0;
     }
-
     .feature-list li {
         display: flex;
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: 12px;
+        margin-bottom: 14px;
         font-size: 15px;
+        color: #334155;
     }
-
     .feature-list i {
-        color: var(--success-color);
-        flex-shrink: 0;
+        color: #22c55e;
         font-size: 20px;
+        margin-top: 2px;
     }
 
-    /* ==================== PRICING SECTION ==================== */
-    .pricing {
-        padding: 4rem 0;
+    .content-text {
+        font-size: 17px;
+        line-height: 1.75;
+        color: #475569;
+        margin-bottom: 24px;
     }
-
-    .section-header {
-        text-align: center;
-        margin-bottom: 3rem;
-    }
-
-    .section-eyebrow {
-        display: inline-block;
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--primary-color);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 1rem;
-    }
-
-    .pricing-card {
-        background: #ffffff;
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 2rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        height: 100%;
-    }
-
-    .pricing-card.featured {
-        border: 2px solid var(--primary-color);
-        transform: scale(1.05);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .pricing-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .pricing-card.featured:hover {
-        transform: scale(1.05) translateY(-8px);
-    }
-
-    .pricing-title {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 1rem;
-    }
-
-    .pricing-description {
-        color: #6b7280;
-        font-size: 14px;
-        margin-bottom: 2rem;
-        min-height: 40px;
-    }
-
-    .pricing-price {
+    .content-title {
         font-size: 36px;
         font-weight: 800;
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
+        margin-bottom: 20px;
+        color: #0f172a;
     }
 
-    .pricing-period {
-        color: #6b7280;
-        font-size: 14px;
-        margin-bottom: 2rem;
+    /* ================= CTA ================= */
+    .cta-section {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #0b1f3a, #0e2a47);
+        position: relative;
+    }
+    .cta-box {
+        max-width: 850px;
+        margin: auto;
+        padding: 60px 40px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+        text-align: center;
+    }
+    .cta-box h2 {
+        font-size: 42px;
+        font-weight: 800;
+        color: #ffffff;
+    }
+    .cta-box h2 span { color: #22c55e; }
+    .cta-box p {
+        margin-top: 18px;
+        font-size: 18px;
+        color: #d1d5db;
+        line-height: 1.6;
+    }
+    .cta-actions {
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
     }
 
-    .pricing-features {
-        list-style: none;
-        text-align: left;
-        margin: 2rem 0;
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 992px) {
+        .two-col {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        .two-col.reverse { direction: ltr; }
     }
-
-    .pricing-features li {
-        padding: 0.75rem 0;
-        border-bottom: 1px solid var(--border-color);
-        font-size: 14px;
-        color: #6b7280;
-    }
-
-    .pricing-features li:last-child {
-        border-bottom: none;
-    }
-
-    .pricing-features i {
-        color: var(--success-color);
-        margin-right: 0.75rem;
-    }
-
-    .pricing-button {
-        margin-top: 2rem;
-        width: 100%;
-    }
-
-    /* ==================== COMPARISON SECTION ==================== */
-    .comparison {
-        padding: 4rem 0;
-        background: var(--light-bg);
-    }
-
-    .comparison-table {
-        overflow-x: auto;
-        margin-top: 2rem;
-    }
-
-    .comparison-table table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .comparison-table th {
-        background: var(--primary-color);
-        color: white;
-        padding: 1.5rem;
-        text-align: left;
-        font-weight: 700;
-    }
-
-    .comparison-table td {
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .comparison-table tr:nth-child(even) {
-        background: rgba(255, 255, 255, 0.5);
-    }
-
-    .comparison-table i {
-        font-size: 20px;
-    }
-
-    .check-icon {
-        color: var(--success-color);
-    }
-
-    .cross-icon {
-        color: #ef4444;
-    }
-
-    /* ==================== RESPONSIVENESS ==================== */
+    
     @media (max-width: 768px) {
         .services-hero {
-            padding: 2rem 0;
+            min-height: auto;
+            padding: 80px 0 60px;
         }
-
-        .services-hero h1 {
-            font-size: 32px;
-        }
-
-        .service-detail-row {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .service-detail-row.reverse {
-            direction: ltr;
-        }
-
-        .service-image {
-            padding: 2rem;
-            font-size: 50px;
-        }
-
-        .pricing-card.featured {
-            transform: scale(1);
-        }
-
-        .pricing-card.featured:hover {
-            transform: translateY(-8px);
-        }
-
-        .comparison-table {
-            font-size: 14px;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 1rem;
-        }
+        .services-hero h1 { font-size: 36px; }
+        .services-hero p { font-size: 16px; }
+        section { padding: 60px 0; }
+        .section-title { font-size: 34px; }
+        .content-title { font-size: 28px; }
+        .card-content { padding: 26px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .stat-card h2 { font-size: 40px; }
+        .cta-box h2 { font-size: 32px; }
+        .cta-box { padding: 40px 24px; }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Services Hero -->
+<!-- HERO -->
 <section class="services-hero">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8" data-aos="fade-up">
-                <h1>Our Services</h1>
-                <p>Comprehensive RFID-enabled laundry management solutions designed to optimize your healthcare operations and eliminate asset losses.</p>
+        <div class="col-lg-7" data-aos="fade-right">
+            <h1>Healthcare & Institutional<br><span>Laundry Services</span></h1>
+            <p>Technology-driven laundry services designed exclusively for hospitals and institutions. We combine RFID automation, healthcare-grade processing, and managed operations to eliminate linen loss, improve hygiene compliance, and deliver complete transparency.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN SERVICES -->
+<section>
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-eyebrow">What We Deliver</span>
+            <h2 class="section-title">Comprehensive Laundry Services for<br><span>Healthcare & Institutions</span></h2>
+            <p class="section-subtitle">Laundry Express manages the complete linen ecosystem — from RFID tagging and hospital-grade processing to digital reporting and managed operations — ensuring safety, accountability, and efficiency at every stage.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="zoom-in-up">
+                <div class="card position-relative">
+                    <span class="card-badge">Healthcare</span>
+                    <div class="card-img">
+                        <img src="{% static 'img/services/HealthCareLaundry.png' %}" alt="Healthcare Laundry Processing">
+                    </div>
+                    <div class="card-content">
+                        <h4>Healthcare Laundry Processing</h4>
+                        <p>Specialized hospital-grade laundry processing designed to meet strict infection control and hygiene compliance standards.</p>
+                        <p>Our workflows protect patient safety, staff safety, and fabric integrity through validated wash programs, segregation protocols, and hygienic finishing processes.</p>
+                        <p>Every batch is processed with traceability, audit readiness, and consistent quality control.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="150">
+                <div class="card position-relative">
+                    <span class="card-badge badge-green">RFID</span>
+                    <div class="card-img">
+                        <img src="{% static 'img/services/rfid-linen.png' %}" alt="RFID Linen Management">
+                    </div>
+                    <div class="card-content">
+                        <h4>RFID Linen Management System</h4>
+                        <p>End-to-end RFID-based Linen Management System where every linen item is digitally tracked from issue to wash to return.</p>
+                        <p>Automated tracking eliminates manual registers, paper-based errors, and billing disputes while delivering real-time inventory visibility.</p>
+                        <p>Hospitals gain complete control, reduced shrinkage, and data-backed insights.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="card position-relative">
+                    <span class="card-badge badge-blue">Operations</span>
+                    <div class="card-img">
+                        <img src="{% static 'img/services/operationsAndSupport.png' %}" alt="Operations and Support">
+                    </div>
+                    <div class="card-content">
+                        <h4>Operations & Managed Support</h4>
+                        <p>Dedicated operational teams ensure smooth, uninterrupted laundry services aligned with hospital workflows.</p>
+                        <p>SLA-driven performance monitoring, audits, reporting, and continuous optimization ensure accountability at every level.</p>
+                        <p>We operate as a long-term healthcare operations partner — not just a service vendor.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Service Details Section -->
-
-<!-- Service 1 -->
-<section class="service-detail">
+<!-- TECHNOLOGY -->
+<section>
     <div class="container">
-        <div class="service-detail-row" data-aos="fade-up">
-            <div class="service-image">
-                <i class="fas fa-tag"></i>
+        <div class="two-col" data-aos="fade-up">
+            <div class="img-wrapper">
+                <img src="{% static 'img/hero/hero-img-5.jpg' %}" alt="RFID Technology Platform">
             </div>
             <div>
-                <h2>RFID Tagging & Onboarding</h2>
-                <p>We provide end-to-end RFID tagging solutions for all your linen assets, creating a unique digital identity for each item.</p>
+                <span class="section-eyebrow">Our Technology</span>
+                <h2 class="content-title">Smart RFID Technology That<br><span class="section-title">Powers Every Service</span></h2>
+                <p class="content-text">Our RFID Linen Management System integrates hardware, software, and workflows into a single digital platform — delivering paperless operations and real-time visibility.</p>
+                <div class="feature-grid">
+                    <div class="feature-item"><span>✔</span> RFID Tags on Every Linen</div>
+                    <div class="feature-item"><span>✔</span> Automated Tracking Touchpoints</div>
+                    <div class="feature-item"><span>✔</span> App-Based System – Zero Paperwork</div>
+                    <div class="feature-item"><span>✔</span> Real-Time Dashboards & Reports</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Hospital Benefits</span>
+            <h2 class="section-title">Measurable Impact for<br><span>Healthcare Operations</span></h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3" data-aos="fade-up">
+                <div class="stat-card">
+                    <h2>30–40%</h2>
+                    <p>Reduction in Linen Loss</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
+                    <h2>100%</h2>
+                    <p>Elimination of Manual Registers</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
+                    <h2>100%</h2>
+                    <p>Real-Time Linen Visibility</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-card">
+                    <h2>✔</h2>
+                    <p>Improved Infection Control</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICE DETAILS -->
+<section>
+    <div class="container">
+        <div class="two-col" data-aos="fade-up">
+            <div class="img-wrapper">
+                <img src="{% static 'img/services/rfid-linen.png' %}" alt="RFID Tagging">
+            </div>
+            <div>
+                <h2 class="content-title">RFID Tagging & Onboarding</h2>
+                <p class="content-text">We provide end-to-end RFID tagging solutions for all your linen assets, creating a unique digital identity for each item.</p>
                 <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> Complete linen inventory assessment</li>
                     <li><i class="fas fa-check-circle"></i> High-quality RFID tag application</li>
@@ -313,16 +459,15 @@
     </div>
 </section>
 
-<!-- Service 2 -->
-<section class="service-detail">
+<section>
     <div class="container">
-        <div class="service-detail-row reverse" data-aos="fade-up">
-            <div class="service-image">
-                <i class="fas fa-arrows-alt"></i>
+        <div class="two-col reverse" data-aos="fade-up">
+            <div class="img-wrapper">
+                <img src="{% static 'img/services/operationsAndSupport.png' %}" alt="Real-Time Tracking">
             </div>
             <div>
-                <h2>Real-Time Tracking & Inventory</h2>
-                <p>Advanced RFID readers and our intelligent system provide real-time visibility into linen movement across all departments.</p>
+                <h2 class="content-title">Real-Time Tracking & Inventory</h2>
+                <p class="content-text">Advanced RFID readers and our intelligent system provide real-time visibility into linen movement across all departments.</p>
                 <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> Live location tracking of all items</li>
                     <li><i class="fas fa-check-circle"></i> Automated issue and return recording</li>
@@ -335,16 +480,15 @@
     </div>
 </section>
 
-<!-- Service 3 -->
-<section class="service-detail">
+<section>
     <div class="container">
-        <div class="service-detail-row" data-aos="fade-up">
-            <div class="service-image">
-                <i class="fas fa-check-double"></i>
+        <div class="two-col" data-aos="fade-up">
+            <div class="img-wrapper">
+                <img src="{% static 'img/services/HealthCareLaundry.png' %}" alt="Quality Assurance">
             </div>
             <div>
-                <h2>Quality Assurance & Compliance</h2>
-                <p>Rigorous quality checks and full compliance with healthcare standards at every step of the process.</p>
+                <h2 class="content-title">Quality Assurance & Compliance</h2>
+                <p class="content-text">Rigorous quality checks and full compliance with healthcare standards at every step of the process.</p>
                 <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> Pre-wash inspection protocols</li>
                     <li><i class="fas fa-check-circle"></i> Validated washing processes</li>
@@ -357,16 +501,15 @@
     </div>
 </section>
 
-<!-- Service 4 -->
-<section class="service-detail">
+<section>
     <div class="container">
-        <div class="service-detail-row reverse" data-aos="fade-up">
-            <div class="service-image">
-                <i class="fas fa-chart-line"></i>
+        <div class="two-col reverse" data-aos="fade-up">
+            <div class="img-wrapper">
+                <img src="{% static 'img/services/rfid-linen.png' %}" alt="Analytics & Reporting">
             </div>
             <div>
-                <h2>Analytics & Reporting</h2>
-                <p>Comprehensive dashboards and detailed reports provide actionable insights into your laundry operations.</p>
+                <h2 class="content-title">Analytics & Reporting</h2>
+                <p class="content-text">Comprehensive dashboards and detailed reports provide actionable insights into your laundry operations.</p>
                 <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> Real-time KPI dashboards</li>
                     <li><i class="fas fa-check-circle"></i> Consumption analysis by department</li>
@@ -379,16 +522,15 @@
     </div>
 </section>
 
-<!-- Service 5 -->
-<section class="service-detail">
+<section>
     <div class="container">
-        <div class="service-detail-row" data-aos="fade-up">
-            <div class="service-image">
-                <i class="fas fa-headset"></i>
+        <div class="two-col" data-aos="fade-up">
+            <div class="img-wrapper">
+                <img src="{% static 'img/services/operationsAndSupport.png' %}" alt="24/7 Support">
             </div>
             <div>
-                <h2>24/7 Support & Training</h2>
-                <p>Dedicated support team and comprehensive training programs ensure seamless operations and maximum ROI.</p>
+                <h2 class="content-title">24/7 Support & Training</h2>
+                <p class="content-text">Dedicated support team and comprehensive training programs ensure seamless operations and maximum ROI.</p>
                 <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> Round-the-clock technical support</li>
                     <li><i class="fas fa-check-circle"></i> Staff training programs</li>
@@ -401,151 +543,23 @@
     </div>
 </section>
 
-<!-- Pricing Section -->
-<section class="pricing">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-eyebrow">Flexible Pricing</span>
-            <h2>Choose Your Plan</h2>
-            <p>Scalable solutions tailored to your facility size and requirements.</p>
-        </div>
-
-        <div class="row gy-4">
-            <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                <div class="pricing-card">
-                    <div class="pricing-title">Starter</div>
-                    <div class="pricing-description">For small hospitals and clinics</div>
-                    <div class="pricing-price">₹50K</div>
-                    <div class="pricing-period">per month</div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Upto 5,000 items</li>
-                        <li><i class="fas fa-check"></i> Basic tracking</li>
-                        <li><i class="fas fa-check"></i> Monthly reports</li>
-                        <li><i class="fas fa-check"></i> Email support</li>
-                        <li><i class="fas fa-times"></i> Advanced analytics</li>
-                        <li><i class="fas fa-times"></i> API access</li>
-                    </ul>
-                    <a href="{% url 'contact' %}" class="btn btn-primary pricing-button">Get Started</a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="pricing-card featured">
-                    <div class="pricing-title">Professional</div>
-                    <div class="pricing-description">For mid-sized healthcare facilities</div>
-                    <div class="pricing-price">₹100K</div>
-                    <div class="pricing-period">per month</div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Upto 25,000 items</li>
-                        <li><i class="fas fa-check"></i> Real-time tracking</li>
-                        <li><i class="fas fa-check"></i> Weekly reports</li>
-                        <li><i class="fas fa-check"></i> Phone & email support</li>
-                        <li><i class="fas fa-check"></i> Advanced analytics</li>
-                        <li><i class="fas fa-times"></i> API access</li>
-                    </ul>
-                    <a href="{% url 'contact' %}" class="btn btn-primary pricing-button">Get Started</a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="pricing-card">
-                    <div class="pricing-title">Enterprise</div>
-                    <div class="pricing-description">For large healthcare networks</div>
-                    <div class="pricing-price">Custom</div>
-                    <div class="pricing-period">contact us</div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Unlimited items</li>
-                        <li><i class="fas fa-check"></i> Advanced tracking</li>
-                        <li><i class="fas fa-check"></i> Real-time reports</li>
-                        <li><i class="fas fa-check"></i> 24/7 support</li>
-                        <li><i class="fas fa-check"></i> Advanced analytics</li>
-                        <li><i class="fas fa-check"></i> API access</li>
-                    </ul>
-                    <a href="{% url 'contact' %}" class="btn btn-primary pricing-button">Contact Sales</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Comparison Section -->
-<section class="comparison">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Plan Comparison</h2>
-        </div>
-
-        <div class="comparison-table" data-aos="fade-up">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Starter</th>
-                        <th>Professional</th>
-                        <th>Enterprise</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Item Capacity</strong></td>
-                        <td>5,000</td>
-                        <td>25,000</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Real-Time Tracking</strong></td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Analytics Dashboard</strong></td>
-                        <td>Basic</td>
-                        <td>Advanced</td>
-                        <td>Enterprise</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Support</strong></td>
-                        <td>Email</td>
-                        <td>Phone & Email</td>
-                        <td>24/7 Dedicated</td>
-                    </tr>
-                    <tr>
-                        <td><strong>API Access</strong></td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Custom Integration</strong></td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Training</strong></td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td>Online</td>
-                        <td>Onsite & Online</td>
-                    </tr>
-                    <tr>
-                        <td><strong>SLA Guarantee</strong></td>
-                        <td>95%</td>
-                        <td>98%</td>
-                        <td>99.5%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-light));">
+<!-- CTA -->
+<section class="cta-section">
     <div class="container" data-aos="fade-up">
-        <h2 style="color: white;">Ready to Get Started?</h2>
-        <p style="color: rgba(255, 255, 255, 0.9);">Let us help you transform your laundry operations with advanced RFID technology.</p>
-        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Schedule a Free Consultation</a>
+        <div class="cta-box">
+            <h2>Ready to Transform Your<br><span>Laundry Operations?</span></h2>
+            <p>Let us help you eliminate linen loss, improve hygiene compliance, and gain complete transparency with our RFID-enabled laundry management solutions.</p>
+            <div class="cta-actions">
+                <a href="{% url 'contact' %}" class="btn btn-primary">Schedule a Free Consultation</a>
+                <a href="{% url 'about' %}" class="btn btn-outline-light">Learn More About Us</a>
+            </div>
+        </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    AOS.init({ once: true, duration: 900, easing: "ease-out-cubic" });
+</script>
 {% endblock %}
