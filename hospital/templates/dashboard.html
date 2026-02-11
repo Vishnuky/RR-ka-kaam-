@@ -1,6 +1,104 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Hospital Dashboard | Laundry Express{% endblock %}
+{% block navbar %}
+ <header class="main-header">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}">
+             <img
+              src="{% static 'img/logos/RRLOGO.png' %}"
+              alt="Laundry Express Logo"
+              class="navbar-logo">
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Mobile Top Bar (Inside Hamburger Menu) -->
+            <div class="mobile-top-bar">
+              <div class="mobile-top-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 9XXXXXXXXX</span>
+              </div>
+              <div class="mobile-top-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon – Sat, 9:00 AM – 7:00 PM</span>
+              </div>
+              <div class="mobile-top-item">
+                <a href="{% url 'home' %}" class="mobile-top-link">Home</a>
+              </div>
+            </div>
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'hospital:dashboard' %}">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                
+                <a class="nav-link" href="{% url 'hospital:rfid_details' %}">RFID Details</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'hospital:orders' %}">Orders</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'hospital:scan_logs' %}">Scan Logs</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item ms-2 dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userMenu"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="fas fa-user"></i> {{ user.first_name}}
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="userMenu"
+                >
+                  <li>
+                    {% if user.groups.all.0.name == "Hospital" %}
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'hospital:dashboard' %}"
+                      >Dashboard</a
+                    >
+                    {% endif %}
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Profile</a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'logout' %}"
+                      >Logout</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              {% else %}
+              <li class="nav-item ms-lg-3">
+                <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+ {% endblock %}
 
 {% block content %}
 

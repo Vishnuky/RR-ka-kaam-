@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | LMS Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --h-primary: #0ea5e9;
+            --h-dark: #0f172a;
+            --h-bg: #f8fafc;
+            --h-danger: #ef4444;
+            --h-success: #22c55e;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+             body { background-color: var(--h-bg); display: flex; height: 100vh; overflow: hidden; }
+        /* Sidebar */
+            .sidebar { width: 280px; background: var(--h-dark); color: white; display: flex; flex-direction: column; flex-shrink: 0; }
+                .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #1e293b; }
+                    .sidebar-header h2 { color: #60a5fa; font-size: 1.4rem; font-weight: 800; }
+                         .nav-links { flex: 1; padding: 20px 10px; list-style: none; }
+                             .nav-item { 
+            padding: 14px 20px; border-radius: 10px; cursor: pointer; margin-bottom: 8px; 
+            display: flex; align-items: center; gap: 12px; color: #94a3b8; transition: 0.3s;
+                                         }
+        .nav-item:hover, .nav-item.active { background: var(--h-primary); color: white; }
+
+        /* Main Content */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-nav { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; position: sticky; top: 0; z-index: 100; }
+        
+        .container { padding: 30px; }
+        .page-section { display: none; animation: fadeIn 0.3s ease-in; }
+        .page-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* OVERVIEW CARDS (As per Page 1 Style) */
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 25px; border-radius: 12px; border-bottom: 4px solid var(--h-primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .stat-card.red { border-bottom-color: var(--h-danger); }
+        .stat-card h3 { font-size: 0.8rem; color: #64748b; text-transform: uppercase; margin-bottom: 8px; }
+        .stat-card .value { font-size: 1.8rem; font-weight: 700; color: var(--h-dark); }
+
+        /* SCAN PANEL */
+        .scan-hero { background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); color: white; padding: 40px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .scan-btn { background: white; color: var(--h-primary); padding: 15px 35px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer; }
+
+        /* TABLES */
+        .panel { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 15px; background: #f8fafc; color: #64748b; font-size: 0.85rem; border-bottom: 2px solid #edf2f7; }
+        td { padding: 15px; border-bottom: 1px solid #edf2f7; font-size: 0.9rem; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+        .bg-success { background: #dcfce7; color: #166534; }
+        .bg-danger { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header"><h2>ADMIN PORTAL</h2></div>
+        <ul class="nav-links">
+            <li class="nav-item active" onclick="showSection('overview')">📊 <span>Overview Dashboard</span></li>
+            <li class="nav-item" onclick="showSection('scan')">📡 <span>Live Scan</span></li>
+            <li class="nav-item" onclick="showSection('inventory')">🔄 <span>Inventory</span></li>
+            <li class="nav-item" onclick="showSection('hospitals')">📜 <span>Hospitals</span></li>
+             <li class="nav-item" onclick="showSection('reports')">📜 <span>Reports</span></li>
+              <li class="nav-item" onclick="showSection('linen')">📜 <span>Linen</span></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="top-nav">
+            <h2 id="page-title">ADMIN DASHBOARD</h2>
+            <div style="font-weight: 600;">Welcome, Admin 👋</div>
+        </div>
+
+        <div class="container">
+            
+            <div id="overview" class="page-section active">
+                <div class="grid-4">
+                    <div class="stat-card"><h3>Total Given (Today)</h3><div class="value">245</div></div>
+                    <div class="stat-card"><h3>Total Received</h3><div class="value">210</div></div>
+                    <div class="stat-card"><h3>In Laundry</h3><div class="value">35</div></div>
+                    <div class="stat-card red"><h3>Missing/Damaged</h3><div class="value">04</div></div>
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                    <div class="panel">
+                        <h3>Weekly Laundry Flow</h3>
+                        <canvas id="hospitalChart" height="150"></canvas>
+                    </div>
+                    <div class="panel">
+                        <h3>Current Status</h3>
+                        <p>🚚 Driver Rahul is arriving in 10 mins for pickup.</p>
+                        <hr style="margin: 15px 0;">
+                        <p>✅ Last batch of 40 bedsheets delivered.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="scan" class="page-section">
+                <div class="scan-hero">
+                    <div>
+                        <h2>RFID Smart Scanner</h2>
+                        <p>Automatic item detection & quantity count</p><br>
+                        <button class="scan-btn" onclick="startScan()">START SCANNING</button>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="live-qty" style="font-size: 4rem; font-weight: 900;">0</div>
+                        <p>Items Detected</p>
+                    </div>
+                </div>
+                <div class="panel" style="margin-top: 20px;">
+                    <h3>Scanned Items Preview</h3>
+                    <table id="scan-preview-table">
+                        <thead><tr><th>Item Type</th><th>RFID Tag</th><th>Status</th></tr></thead>
+                        <tbody id="scan-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="returns" class="page-section">
+                <div class="panel">
+                    <h3>Items Return Tracking</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Item</th><th>RFID</th><th>Status</th><th>Quality Check</th></tr>
+                        </thead>
+                        <tbody id="return-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="history" class="page-section">
+                <div class="panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Order & Invoice History</h3>
+                        <button style="padding: 8px 15px; background: var(--h-dark); color: white; border: none; border-radius: 5px;">Export All</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr><th>Date</th><th>Order ID</th><th>Quantity</th><th>Status</th><th>Invoice</th></tr>
+                        </thead>
+                        <tbody id="history-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Dummy Data Generators
+        const historyTbody = document.getElementById('history-tbody');
+        for(let i=1; i<=20; i++) {
+            historyTbody.innerHTML += `<tr>
+                <td>Feb ${i}, 2026</td>
+                <td>#CH-ORD-${1000+i}</td>
+                <td>${30 + i} Items</td>
+                <td><span class="badge bg-success">Processed</span></td>
+                <td><a href="#" style="color:var(--h-primary)">Download PDF</a></td>
+            </tr>`;
+        }
+
+        const returnTbody = document.getElementById('return-tbody');
+        const items = ['Bedsheet', 'Gown', 'Pillow Cover', 'Towel'];
+        for(let i=1; i<=15; i++) {
+            returnTbody.innerHTML += `<tr>
+                <td>${items[i%4]}</td>
+                <td><code>RF-TAG-${500+i}</code></td>
+                <td><span class="badge bg-success">Received</span></td>
+                <td>Perfect</td>
+            </tr>`;
+        }
+
+        // Scan Simulation
+        function startScan() {
+            let count = 0;
+            let timer = setInterval(() => {
+                count += 2;
+                document.getElementById('live-qty').innerText = count;
+                document.getElementById('scan-tbody').innerHTML += `<tr><td>Bedsheet</td><td>RF-X-${count}</td><td>Detected</td></tr>`;
+                if(count >= 30) {
+                    clearInterval(timer);
+                    alert("Scan Complete! 30 Items added to new Order.");
+                }
+            }, 200);
+        }
+
+        // Chart
+        const ctx = document.getElementById('hospitalChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                datasets: [{ label: 'Cleaned Items', data: [150, 220, 180, 245, 210, 300], borderColor: '#0ea5e9', fill: false }]
+            }
+        });
+    </script>
+</body>
+</html>

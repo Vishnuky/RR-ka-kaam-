@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Drop - RFID Scan</title>
+    <style>
+        :root {
+            --primary-color: #e67e22; /* Return/Delivery Orange Theme */
+            --bg-color: #f4f7f6;
+            --text-dark: #2d3436;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            border-top: 10px solid var(--primary-color);
+        }
+
+        h2 { color: var(--text-dark); margin-bottom: 5px; }
+        p { color: #636e72; font-size: 0.9rem; margin-bottom: 25px; }
+
+        .status-container {
+            background: #fdf2e9;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 1px dashed var(--primary-color);
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #d35400;
+            font-weight: bold;
+        }
+
+        .status-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-top: 8px;
+        }
+
+        .btn-scan {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-scan:active { transform: scale(0.97); }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .icon-box { font-size: 50px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="icon-box">🚚</div>
+    <h2>Return Drop</h2>
+    <p>Laundry drop-off after wash</p>
+
+    <div class="status-container">
+        <span class="label">Current Status</span>
+        <div class="status-value" id="statusText">Awaiting Scan...</div>
+    </div>
+
+    <button class="btn-scan" onclick="startScan()">Confirm Return Drop</button>
+
+    <div class="footer">
+        <span>📍</span>
+        <span id="location">Detecting Location...</span>
+    </div>
+</div>
+
+<script>
+    // RFID Scan Simulation
+    function startScan() {
+        const status = document.getElementById('statusText');
+        status.innerText = "Scanning...";
+        status.style.color = "#7f8c8d";
+
+        setTimeout(() => {
+            // Requirement: Status = "Picked from Laundry"
+            status.innerText = "Picked from Laundry";
+            status.style.color = "#e67e22";
+            
+            // Optional: Success Alert
+            console.log("Status Updated: Picked from Laundry");
+        }, 1500);
+    }
+
+    // Auto Location Feature
+    function getAutoLocation() {
+        const locElement = document.getElementById('location');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude.toFixed(4);
+                const long = position.coords.longitude.toFixed(4);
+                locElement.innerText = `Location: ${lat}, ${long}`;
+            }, () => {
+                locElement.innerText = "Location: Hospital Wing B";
+            });
+        }
+    }
+
+    // Run on load
+    window.onload = getAutoLocation;
+</script>
+
+</body>
+</html>
