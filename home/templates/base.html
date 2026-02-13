@@ -4,8 +4,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Laundry Express - Advanced RFID-enabled healthcare laundry management solutions">
-    <meta name="keywords" content="RFID, laundry management, healthcare">
+    <meta
+      name="description"
+      content="Laundry Express - Advanced RFID-enabled healthcare laundry management solutions"
+    />
+    <meta name="keywords" content="RFID, laundry management, healthcare" />
 
     <title>
       {% block title %}Laundry Express | Healthcare Laundry Solutions {% endblock %}
@@ -572,10 +575,11 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <a class="navbar-brand" href="{% url 'home' %}">
-             <img
+            <img
               src="{% static 'img/logos/RRLOGO.png' %}"
               alt="Laundry Express Logo"
-              class="navbar-logo">
+              class="navbar-logo"
+            />
           </a>
           <button
             class="navbar-toggler"
@@ -640,6 +644,15 @@
                     <a
                       class="dropdown-item"
                       href="{% url 'hospital:dashboard' %}"
+                      >Dashboard</a
+                    >
+                    {% endif %}
+                  </li>
+                  <li>
+                    {% if user.groups.all.0.name == "delivery" %}
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'delivery:dashboard' %}"
                       >Dashboard</a
                     >
                     {% endif %}
@@ -781,37 +794,37 @@
     <!-- Base Template Scripts -->
     <script>
       // Initialize AOS
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', function () {
         AOS.init({
           duration: 800,
           once: true,
-        });
-      });
+        })
+      })
 
       // Page Loader
-      window.addEventListener("load", function () {
-        const loader = document.getElementById("loader");
+      window.addEventListener('load', function () {
+        const loader = document.getElementById('loader')
         if (loader) {
-          loader.style.opacity = "0";
-          loader.style.transition = "opacity 0.4s ease";
+          loader.style.opacity = '0'
+          loader.style.transition = 'opacity 0.4s ease'
           setTimeout(function () {
-            loader.style.display = "none";
-          }, 400);
+            loader.style.display = 'none'
+          }, 400)
         }
-      });
+      })
 
       // Set active nav link based on current URL
-      document.addEventListener("DOMContentLoaded", function () {
-        const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+      document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link')
 
         navLinks.forEach(function (link) {
-          const href = link.getAttribute("href");
-          if (currentPath === href || currentPath.startsWith(href + "/")) {
-            link.classList.add("active");
+          const href = link.getAttribute('href')
+          if (currentPath === href || currentPath.startsWith(href + '/')) {
+            link.classList.add('active')
           }
-        });
-      });
+        })
+      })
     </script>
 
     {% block extra_js %}{% endblock %}

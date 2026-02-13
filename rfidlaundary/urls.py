@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('hospital/', include('hospital.urls')),
     # path('laundary/', include('laundary.urls')),
-    # path('delivery/', include('delivery.urls')),
+    path('delivery/', include('delivery.urls')),
     
 ]
 if settings.DEBUG:
